@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+.venv/
+
+# Django
+*.log
+*.pot
+*.py[cod]
+*.so
+*.sqlite3
+*.db
+*.mo
+
+# React
+node_modules/
+build/
+dist/
+
+# Other
+.DS_Store
+*.swp
+*.swo
