@@ -1,0 +1,146 @@
+.register {
+  display: flex;
+  flex-direction:row;
+  width: 100%;
+  justify-content: center;
+  padding: 2rem 2.5rem; /* More padding for a spacious feel */
+  background-color: var(
+    --color-bg
+  ); 
+  gap: 5rem;
+}
+.register-right{
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+}
+.register-left{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.register__header {
+  font-family: var(--font-family);
+  text-align: left;
+  margin-bottom: 2rem;
+  font-size: 1.7rem;
+  font-weight: 800; /* Bolder font */
+  color: var(--primary-color); /* Primary color for header */
+}
+
+.register__error {
+  color: #e74c3c; /* Dribbble-like red for errors */
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+
+.register__form-input {
+  margin-bottom: 1.5rem; /* Space between form inputs */
+}
+
+.register_btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-family);
+  background-color: var(--color-primary); /* Dribbble-like blue */
+  color: var(--color-bg);
+  border: none;
+  border-radius: 3rem; /* Rounded corners */
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 800; /* Semi-bold font */
+  transition: background-color 0.3s ease;
+  margin-top: 1.5rem;
+}
+
+.register_btn:hover {
+  background-color: var(--color-secondary);
+}
+
+.register__login-cta {
+  padding-top: 0.5rem;
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-family: var(--font-family);
+  color: var(--color-secondary); /* Secondary color for CTA */
+}
+
+.register__login-cta a {
+  color: var(--color-primary); /* Interactive blue color */
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.register__login-cta a:hover {
+  color: var(--color-secondary); /* Darker blue on hover */
+}
+
+
+/* Styles for the profile picture preview */
+.image-preview {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.image-preview img {
+    width: 100px; /* Adjust the size as needed */
+    height: 100px; /* Adjust the size as needed */
+    object-fit: cover;
+    border-radius: 50%; /* Makes the image rounded */
+    border: 2px solid #ccc; /* Optional: adds a border around the image */
+    display: none; /* Hide image preview by default */
+}
+
+/* Show the image preview if a file is selected */
+input[type="file"]:not(:empty) + .image-preview img {
+    display: block;
+}
+
+
+
+
+.selection_header{
+    font-family: var(--font-family);
+    text-align: left;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500; /* Bolder font */
+    color: var(--primary-color); /* Primary color for header */
+}
+
+/* Styles for the container */
+.role-selection-container {
+    display: flex;
+    gap: 2rem;
+    font-family: var(--font-family);
+    margin-bottom: 0.75rem;
+}
+
+/* Styles for each radio button container */
+.role-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+/* Change the border color when the radio button is checked */
+input[type="radio"]:checked + .role-option {
+    border-color: #0b9;
+    background-color: #e0f7fa;
+}
+
+/* Hide the default radio button */
+input[type="radio"] {
+    display: none;
+}
+

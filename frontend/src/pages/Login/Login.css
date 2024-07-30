@@ -1,0 +1,97 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 10% auto; /* Center and add some top margin */
+    padding: 2rem 2.5rem; /* More padding for a spacious feel */
+    border-radius: 12px; /* More rounded corners */
+  
+  }
+  
+  .login__header {
+    font-family: var(--font-family);
+    text-align: left;
+    margin-bottom: 2rem;
+    font-size: 1.7rem;
+    font-weight: 800; /* Bolder font */
+    color:var(--primary-color); /* Slightly darker text color */
+  }
+  
+  .login__error {
+    color: #ee5e4e; /* Dribbble-like red for errors */
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    font-family: var(--font-family);
+  }
+  
+  .login__forgotpass-cta {
+    margin-top: 0.2rem;
+    font-family: var(--font-family);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size:0.8rem;
+    color: var(--color-primary);
+    text-align: right;
+  }
+  
+  .login__forgotpass-cta:hover {
+    color: var(--color-secondary); /* Darker blue on hover */
+  }
+  
+  .login__btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-family);
+    background-color:var(--color-primary); /* Dribbble-like blue */
+    color: var(--color-bg);
+    border: none;
+    border-radius: 3rem; /* Rounded corners */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 800; /* Semi-bold font */
+    transition: background-color 0.3s ease;
+    margin-top: 1.5rem;
+  }
+  
+  .login__btn:hover {
+     background-color: var(--color-secondary);
+  }
+  
+  .login__register-cta {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    font-family: var(--font-family);
+    color:var(--color-secondary); /* Dark grey text */
+  }
+  
+  .login__register-cta a {
+    color: var(--color-primary); /* Interactive blue color */
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .login__register-cta a:hover {
+    color: var(--color-secondary); /* Darker blue on hover */
+  }
+  
+  .login__notVerified{
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    font-family: var(--font-family);
+    color:var(--color-secondary); /* Dark grey text */
+  }
+  
+  .login__notVerified a{
+    color: var(--color-primary); /* Interactive blue color */
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .login__notVerified a:hover{
+    color: var(--color-secondary); /* Darker blue on hover */
+  }
+  
