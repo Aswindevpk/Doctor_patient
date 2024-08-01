@@ -10,14 +10,17 @@
   gap: 5rem;
 }
 .register-right{
+  flex: 1;
     margin-top: 4rem;
     display: flex;
     flex-direction: column;
+    width: 400px;
 }
 .register-left{
+    flex: 1;
     display: flex;
     flex-direction: column;
-
+    width: 400px;
 }
 
 .register__header {
@@ -78,21 +81,53 @@
   color: var(--color-secondary); /* Darker blue on hover */
 }
 
+.profile_img{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profile_img-label{
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.profile-select{
+  display:flex ;
+  justify-content: space-between;
+  align-items: center;
+}
+#profilePicture{
+  display: none;
+}
+
+
+#fileLabel {
+  display: flex;
+  padding: 10px 20px;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  cursor: pointer;
+  font-family: var(--font-family);
+  border-radius: 5px;
+  font-size: 12px;
+}
 
 /* Styles for the profile picture preview */
 .image-preview {
-    margin-top: 10px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .image-preview img {
-    width: 100px; /* Adjust the size as needed */
-    height: 100px; /* Adjust the size as needed */
+    width: 50px; /* Adjust the size as needed */
+    height: 50px; /* Adjust the size as needed */
     object-fit: cover;
+    border: 1px solid #0b9;
     border-radius: 50%; /* Makes the image rounded */
-    border: 2px solid #ccc; /* Optional: adds a border around the image */
-    display: none; /* Hide image preview by default */
 }
 
 /* Show the image preview if a file is selected */
@@ -107,7 +142,7 @@ input[type="file"]:not(:empty) + .image-preview img {
     font-family: var(--font-family);
     text-align: left;
     margin-bottom: 0.5rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 500; /* Bolder font */
     color: var(--primary-color); /* Primary color for header */
 }
@@ -128,7 +163,7 @@ input[type="file"]:not(:empty) + .image-preview img {
     border: 2px solid #ccc;
     border-radius: 5px;
     width: 100px;
-    height: 50px;
+    height: 40px;
     cursor: pointer;
     transition: border-color 0.3s;
 }
@@ -144,3 +179,25 @@ input[type="radio"] {
     display: none;
 }
 
+.register-cta{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+}
+
+.register-container{
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 7rem 0.5rem 7rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.Register__error {
+  font-family: var(--font-family);
+  margin-top: 0.2rem; /* Space between input and error message */
+  font-size: 0.8rem; /* Smaller font size for error message */
+  color: #e74c3c; /* Red color for errors */
+}

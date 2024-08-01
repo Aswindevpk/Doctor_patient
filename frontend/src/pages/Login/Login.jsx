@@ -12,11 +12,9 @@ const Login = () => {
     username: "",
     password: "",
     error: "",
-    role:'patient',
+    user_type:'patient',
     info: ""
   });
-  let [isEmailVerified, setEmailVerified] = useState(true);
-  let [email, setEmail] = useState(null)
 
   const inputs = [
     {
@@ -44,11 +42,10 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setValues({ ...values, error: "" })
-    let response = await loginUser(values.username, values.password);
+    let response = await loginUser(values.username, values.password,values.user_type);
     if (response) {
-      if (!response.verified) {
-        setEmailVerified(false)
-        setEmail(response.email)
+      if (response.status == 200) {
+        console.log(response)
       } else {
         setValues({ ...values, error: response.message })
       }
@@ -60,25 +57,16 @@ const Login = () => {
     navigate('/register')
   };
 
-  const handleForgotPass = () => {
-    navigate('/forgot-password')
-  };
-
-  const handleVerifyEmail = () => {
-    navigate(`/verify-otp?email=${encodeURIComponent(email)}`)
-  };
-
   let onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     setValues({
-      ...value,
-      [name]: value,
+      ...values,
+      user_type: value,
     });
   };
-
 
   return (
     <div className='login'>
@@ -89,7 +77,7 @@ const Login = () => {
                 type="radio"
                 name="role"
                 value="doctor"
-                checked={values.role === "doctor"}
+                checked={values.user_type === "doctor"}
                 onChange={handleChange}
               />
               <div className="role-option">Doctor</div>
@@ -99,7 +87,7 @@ const Login = () => {
                 type="radio"
                 name="role"
                 value="patient"
-                checked={values.role === "patient"}
+                checked={values.user_type === "patient"}
                 onChange={handleChange}
               />
               <div className="role-option">Patient</div>
@@ -117,9 +105,6 @@ const Login = () => {
             onChange={onChange}
           />
         ))}
-        {!isEmailVerified && (<p className='login__notVerified'>Email not verified.<a onClick={handleVerifyEmail} >Verify Now ?</a></p>)}
-
-        <p className='login__forgotpass-cta' onClick={handleForgotPass}>Forgot ?</p>
         <button className='login__btn' type="submit">Login</button>
       </form>
       <p className='login__register-cta' >Don't have an account? <a onClick={handleRegister}>Sign up</a></p>

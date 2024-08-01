@@ -1,1 +1,64 @@
-/* This is an example CSS file */
+/* src/Dashboard.css */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: var(--font-family);
+  }
+  
+  .dashboard-header {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .user-details {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .user-detail {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    color: #333;
+  }
+  
+  .address-section {
+    margin-top: 20px;
+  }
+  
+  .address-detail {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .logout-button {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    background-color: black;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+  }
+  
+  .logout-button:hover {
+    background-color: #d04c1e;
+  }
+
+  .user_profile-pic{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+  }
+  

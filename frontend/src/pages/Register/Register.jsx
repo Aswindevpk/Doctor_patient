@@ -1,38 +1,43 @@
 import React, { useState, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import FormInput from "../../components/FormInput/FormInput";
 import "./Register.css";
+import axios from "axios";
 
 const Register = () => {
   let { registerUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [values, setValues] = useState({
+    user_type: "patient", // Default role
+    first_name: "",
+    last_name: "",
     username: "",
     email: "",
+    line1: "",
+    city: "",
+    state: "",
+    pincode: "",
     password: "",
     confirmpassword: "",
-    role: "patient", // Default role
     error: [],
+    profile_pic:null
   });
 
-  const [image, setImage] = useState(null);
+  const [imageurl, setImageurl] = useState(null);
 
   const handleFileChange = (event) => {
-      const file = event.target.files[0];
-      if (file) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-              setImage(e.target.result);
-          };
-          reader.readAsDataURL(file);
-      }
+    const file = event.target.files[0];
+    if (file) {
+      setImageurl(URL.createObjectURL(event.target.files[0]));
+      setValues({...values,profile_pic:file})
+    }
   };
 
   const basic_inputs = [
     {
       id: 1,
-      name: "firstname",
+      name: "first_name",
       type: "text",
       placeholder: "",
       pattern: "^[a-zA-Z0-9]{3,16}$",
@@ -42,7 +47,7 @@ const Register = () => {
     },
     {
       id: 2,
-      name: "lastname",
+      name: "last_name",
       type: "text",
       placeholder: "",
       pattern: "^[a-zA-Z0-9]{3,16}$",
@@ -93,7 +98,7 @@ const Register = () => {
       required: true,
     },
     {
-      id: 3,
+      id: 7,
       name: "state",
       type: "text",
       placeholder: "",
@@ -103,7 +108,7 @@ const Register = () => {
       required: true,
     },
     {
-      id: 3,
+      id: 8,
       name: "pincode",
       type: "text",
       placeholder: "",
@@ -113,7 +118,7 @@ const Register = () => {
       required: true,
     },
     {
-      id: 5,
+      id: 9,
       name: "password",
       type: "password",
       placeholder: "",
@@ -124,7 +129,7 @@ const Register = () => {
       required: true,
     },
     {
-      id: 6,
+      id: 10,
       name: "confirmpassword",
       type: "password",
       placeholder: "",
@@ -141,26 +146,49 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // setting error to null
     setValues({ ...values, error: [] });
-    let response = await registerUser(
-      values.username,
-      values.email,
-      values.password
-    );
-    if (response) {
-      console.log(response);
-      let errorMessages = [];
 
-      for (let field in response.message) {
-        if (response.message.hasOwnProperty(field)) {
-          response.message[field].forEach((error) => {
-            errorMessages.push(error);
-          });
-        }
+    // creating formdata for sent images/text
+    const data = new FormData();
+    data.append("user_type", values.user_type);
+    data.append("first_name", values.first_name);
+    data.append("last_name", values.last_name);
+    data.append("username", values.username);
+    data.append("email", values.email);
+    data.append("password", values.password);
+    data.append("profile_pic", values.profile_pic);
+    //address section
+    data.append("address.line1", values.line1);
+    data.append("address.city", values.city);
+    data.append("address.state", values.state);
+    data.append("address.pincode", values.pincode);
+
+    //sending the data
+    try {
+      const response = await axios.post("http://localhost:8000/accounts/register/", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      navigate("/login");
+    } catch (error) {
+      if(error.response){
+          let response = error.response.data;
+          let errorMessages = [];
+          for (let field in response.message) {
+            if (response.message.hasOwnProperty(field)) {
+              response.message[field].forEach((error) => {
+                errorMessages.push(error);
+              });
+            }
+          }
+          console.log(errorMessages)
+          setValues({ ...values, error: errorMessages });
       }
-
-      setValues({ ...values, error: errorMessages });
+      console.error("Error during registration", error);
     }
+
   };
 
   const handleLogin = () => {
@@ -168,86 +196,101 @@ const Register = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     setValues({
-      ...value,
-      [name]: value,
+      ...values,
+      user_type: value,
     });
   };
 
   return (
     <>
-      <form className="register" onSubmit={handleSubmit}>
-        <div className="register-left">
-          <h5 className="register__header">Register to Med</h5>
-          <h5 className="selection_header">Register as</h5>
-          <div className="role-selection-container">
-            <label>
-              <input
-                type="radio"
-                name="role"
-                value="doctor"
-                checked={values.role === "doctor"}
-                onChange={handleChange}
-              />
-              <div className="role-option">Doctor</div>
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="role"
-                value="patient"
-                checked={values.role === "patient"}
-                onChange={handleChange}
-              />
-              <div className="role-option">Patient</div>
-            </label>
-          </div>
-          <h5 className="selection_header">Basic Details</h5>
-          {values.error && <p className="forgotPass__error">{values.error}</p>}
-          {basic_inputs.map((input) => (
-            <FormInput
-              key={input.id}
-              {...input}
-              value={values[input.name]}
-              onChange={onChange}
-            />
-          ))}
-          <div className="form-group">
-            <label htmlFor="profilePicture">Profile Picture:</label>
-            <input
-              type="file"
-              id="profilePicture"
-              name="profilePicture"
-              accept="image/*"
-              onChange={handleFileChange}
-            />
-            <div className="image-preview">
-              {image && <img src={image} alt="Profile Preview" />}
+      <form onSubmit={handleSubmit}>
+        <div className="register-container">
+          <div className="register">
+            <div className="register-left">
+              <h5 className="register__header">Register to Med</h5>
+              <h5 className="selection_header">Register as</h5>
+              <div className="role-selection-container">
+                <label>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="doctor"
+                    checked={values.user_type === "doctor"}
+                    onChange={handleChange}
+                  />
+                  <div className="role-option">Doctor</div>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="patient"
+                    checked={values.user_type === "patient"}
+                    onChange={handleChange}
+                  />
+                  <div className="role-option">Patient</div>
+                </label>
+              </div>
+              <h5 className="selection_header">Basic Details</h5>
+              {values.error && (
+                <p className="Register__error">{values.error}</p>
+              )}
+              {basic_inputs.map((input) => (
+                <FormInput
+                  key={input.id}
+                  {...input}
+                  value={values[input.name]}
+                  onChange={onChange}
+                />
+              ))}
+              <label className="profile_img-label" htmlFor="profilePicture">
+                Profile Picture
+              </label>
+              <div className="profile_img">
+                <div className="image-preview">
+                  {imageurl && <img src={imageurl} alt="Profile Preview" />}
+                </div>
+                <div className="profile-select">
+                  <input
+                    type="file"
+                    id="profilePicture"
+                    name="profilePicture"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                  />
+                  <label htmlFor="profilePicture" id="fileLabel">
+                    Upload Profile Pic
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div className="register-right">
+              <h5 className="selection_header">Address</h5>
+              {other_inputs.map((input) => (
+                <FormInput
+                  key={input.id}
+                  {...input}
+                  value={values[input.name]}
+                  onChange={onChange}
+                />
+              ))}
             </div>
           </div>
-        </div>
-        <div className="register-right">
-          <h5 className="selection_header">Address</h5>
-          {other_inputs.map((input) => (
-            <FormInput
-              key={input.id}
-              {...input}
-              value={values[input.name]}
-              onChange={onChange}
-            />
-          ))}
-          <p className="register__login-cta">
-            By creating an account you agree with our <a>Terms of Service</a>,
-            <br></br> <a>Privacy Policy</a>, and our default{" "}
-            <a>Notification Settings.</a>{" "}
-          </p>
-          <button className="register_btn" type="submit">
-            Create account
-          </button>
-          <p className="register__login-cta" onClick={handleLogin}>
-            Already have an Account ? <a>Log In</a>
-          </p>
+          <div className="register-cta">
+            <p className="register__login-cta">
+              By creating an account you agree with our <a>Terms of Service</a>,
+              <br></br> <a>Privacy Policy</a>, and our default{" "}
+              <a>Notification Settings.</a>{" "}
+            </p>
+            <button className="register_btn" type="submit">
+              Create account
+            </button>
+            <p className="register__login-cta" onClick={handleLogin}>
+              Already have an Account ? <a>Log In</a>
+            </p>
+          </div>
         </div>
       </form>
     </>

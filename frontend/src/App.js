@@ -22,10 +22,10 @@ function App() {
             </Route>
             <Route exact path='/' element={<PrivateRoute />}>
               <Route exact path='/doctor' element={<DoctorRoute />}>
-                <Route exact path='/doctor/dashboard' element={<DoctorDashboard />} />
+                <Route path='/doctor/' element={<DoctorDashboard />} />
               </Route>
               <Route exact path='/patient' element={<PatientRoute />}>
-                <Route exact path='/patient/dashboard' element={<PatientDashboard />} />
+                <Route path='/patient/' element={<PatientDashboard />} />
               </Route>
             </Route>
           </Routes>

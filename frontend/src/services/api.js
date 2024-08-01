@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://localhost:8000/api/'; // Replace with your Django API base URL
+const API_URL = 'http://localhost:8000/'; // Replace with your Django API base URL
 
 const api = axios.create({
   baseURL: API_URL,

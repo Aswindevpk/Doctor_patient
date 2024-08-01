@@ -15,95 +15,9 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
     
 
-
-    let registerUser = async (username, email, password) => {
+    let loginUser = async (username, password, user_type) => {
         try{
-            const values = { 'username': username, 'password': password, 'email': email }
-            await api.post("/accounts/register/", values);
-            navigate('/login')
-        } catch(error){
-            if (error.response){
-                return error.response.data
-            }
-            console.error("Error during registration creation:", error);
-        }
-
-
-    };
-
-    let genarateOtp = async (email) => {
-        try{
-            const values = { 'email': email }
-            let response = await fetch("/accounts/genarate_otp/", values);
-            return response.data;
-        } catch (error){
-            if (error.response){
-                return error.response.data
-            }
-            console.error("Error during otp generation creation:", error);
-        }
-    }
-
-    let forgotPass = async (email) => {
-        try {
-            const values = { 'email': email }
-            let response = await api.post("/accounts/forgot_password/", values);
-            return response.data
-        } catch (error) {
-            if (error.response){
-                return error.response.data
-            }
-            console.error("Error during link creation:", error);
-        }
-    };
-
-    let forgotPassConfirm = async (token) => {
-        try {
-            const values =  { 'token': token }
-            let response = await api.post("/accounts/forgot_password_confirm/", values);
-            localStorage.setItem('resetToken', token)
-            navigate('/reset-password')
-            return response.data
-        } catch (error) {
-            if (error.response){
-                return error.response.data
-            }
-            console.error("Error during link creation:", error);
-        }
-    };
-
-    let ResetPass = async (password) => {
-        try {
-            let ResetToken = "";
-            ResetToken = localStorage.getItem('resetToken');
-            const values =  { 'password': password, 'token': ResetToken }
-            let response = await api.post("/accounts/reset_password/", values);
-
-            localStorage.removeItem('resetToken')
-            return response.data;
-        } catch (error) {
-            if (error.response){
-                return error.response.data
-            }
-        }
-    };
-
-    let verifyOtp = async (email, otp) => {
-        try {
-            const values = { 'email': email, 'otp': otp }
-            let response = await api.post("/accounts/verify_otp/", values);
-            return response.data
-        } catch (error) {
-            if (error.response){
-                return error.response.data
-            }
-        }
-    }
-
-
-    let loginUser = async (username, password) => {
-        try{
-            const values = { 'username': username, 'password': password };
+            const values = { 'username': username, 'password': password, 'user_type':user_type};
             let response = await api.post("/accounts/login/", values);
             const data = response.data
             if (response.data.status) {
@@ -111,7 +25,11 @@ export const AuthProvider = ({ children }) => {
                 setUser(jwtDecode(data.access))
                 setisAuthenticated(true)
                 localStorage.setItem('authTokens', JSON.stringify({ 'access': data.access, 'refresh': data.refresh }));
-                navigate('/')
+                if(user_type=='doctor'){
+                    navigate('/doctor/')
+                }else if (user_type=='patient'){
+                    navigate('/patient/')
+                }
             }
             return data
         }catch (error){
@@ -175,12 +93,6 @@ export const AuthProvider = ({ children }) => {
         isAuthenticated: isAuthenticated,
         loginUser: loginUser,
         logoutUser: logoutUser,
-        registerUser: registerUser,
-        verifyOtp: verifyOtp,
-        genarateOtp: genarateOtp,
-        forgotPass: forgotPass,
-        forgotPassConfirm: forgotPassConfirm,
-        ResetPass: ResetPass,
     }
 
     return (
