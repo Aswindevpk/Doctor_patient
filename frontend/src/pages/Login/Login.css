@@ -5,8 +5,8 @@
     justify-content: center;
     width: 100%;
     max-width: 500px;
-    margin: 10% auto; /* Center and add some top margin */
-    padding: 2rem 2.5rem; /* More padding for a spacious feel */
+    margin: 5% auto; /* Center and add some top margin */
+    padding: 2rem 1rem; /* More padding for a spacious feel */
     border-radius: 12px; /* More rounded corners */
   
   }
@@ -15,8 +15,8 @@
     font-family: var(--font-family);
     text-align: left;
     margin-bottom: 2rem;
-    font-size: 1.7rem;
-    font-weight: 800; /* Bolder font */
+    font-size: 1.5rem;
+    font-weight: 600; /* Bolder font */
     color:var(--primary-color); /* Slightly darker text color */
   }
   

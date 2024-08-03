@@ -1,31 +1,35 @@
 import './App.css';
-import { PrivateRoute,PublicRoute,DoctorRoute,PatientRoute }from './utils/Routes';
-import { Login,Register,PatientDashboard,DoctorDashboard } from './pages';
+import { PrivateRoute, PublicRoute, DoctorRoute, PatientRoute } from './utils/Routes';
+import { Login, Register, UserProfile, Home, WriteBlog, BlogView, Homedoctor } from './pages';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import './App.css';
 //contains authentication related
 import { AuthProvider } from './context/AuthContext';
-
+import { Navbar } from './components';
 
 function App() {
   return (
     <div>
       <Router>
         <AuthProvider>
-          {/* <Navbar /> */}
+          <Navbar />
           <Routes>
             <Route element={<PublicRoute />}>
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
             </Route>
-            <Route exact path='/' element={<PrivateRoute />}>
-              <Route exact path='/doctor' element={<DoctorRoute />}>
-                <Route path='/doctor/' element={<DoctorDashboard />} />
+            <Route element={<PrivateRoute />}>
+              <Route path='/profile' element={<UserProfile />} />
+              <Route path='/blog/:id' element={<BlogView />} />
+              <Route element={<PatientRoute />}>
+                <Route path='/' element={<Home />} />
               </Route>
-              <Route exact path='/patient' element={<PatientRoute />}>
-                <Route path='/patient/' element={<PatientDashboard />} />
+              <Route element={<DoctorRoute />}>
+                <Route path='/doctor-home' element={<Homedoctor />} />
+                <Route path='/write' element={<WriteBlog />} />
+                <Route path='/write/:id' element={<WriteBlog />} />
               </Route>
             </Route>
           </Routes>

@@ -1,0 +1,47 @@
+/* styles.css */
+.blog-container {
+    max-width: 80%;
+    margin: auto;
+    padding: 40px;
+    background: #fff;
+    font-family: var(--font-family);
+  }
+  
+  .blog-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+  
+  .blog-meta {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .blog-meta span {
+    margin-right: 5px;
+  }
+  .image-container{
+    margin: auto;
+    width: 100%;
+    max-width: 800px; /* Set your desired max width */
+    height: 400px; /* Set your desired height */
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  .blog-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .blog-content {
+    margin-top: 2rem;
+    font-size: 1rem;
+    line-height: 1.6em;
+  }
+
+  .blog-summary{
+    margin-top: 10px;
+  }
+  

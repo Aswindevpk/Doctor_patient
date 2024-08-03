@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../../context/AuthContext";
-import api from "../../services/api";
-import './DoctorDashboard.css'
+import {api} from "../../services/api";
+import './UserProfile.css'
 
 const DoctorDashboard = () => {
   let { logoutUser } = useContext(AuthContext);
@@ -30,8 +30,8 @@ const DoctorDashboard = () => {
 
   return (
     <div className="container">
-      <h1 className="dashboard-header">Doctor Dashboard</h1>
       <div className="user-details">
+      <h1 className="dashboard-header">{user.user_type} Profile</h1>
       <img className="user_profile-pic" src={profilePicUrl} alt="profile" />
         <h2>
           {user.first_name} {user.last_name}
@@ -45,9 +45,6 @@ const DoctorDashboard = () => {
             {user.address.city}, {user.address.state} - {user.address.pincode}
           </p>
         </div>
-        <button className="logout-button" onClick={handleLogout}>
-          Logout
-        </button>
       </div>
     </div>
   );

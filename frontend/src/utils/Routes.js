@@ -15,12 +15,12 @@ const PublicRoute = () => {
 
 const DoctorRoute = () => {
     const { user } = useContext(AuthContext)
-    return user && user.user_type === 'doctor' ? <Outlet /> : <Navigate to="/patient/" />;
+    return user && user.user_type === 'doctor' ? <Outlet /> : <Navigate to="/" />;
 };
-
 const PatientRoute = () => {
-    const { user } = useContext(AuthContext);
-    return user && user.user_type === 'patient' ? <Outlet /> : <Navigate to="/doctor/" />;
+    const { user } = useContext(AuthContext)
+    return user && user.user_type === 'patient' ? <Outlet /> : <Navigate to="/doctor-home" />;
 };
 
-export { PublicRoute, PrivateRoute,PatientRoute,DoctorRoute };
+
+export { PublicRoute, PrivateRoute,DoctorRoute,PatientRoute};

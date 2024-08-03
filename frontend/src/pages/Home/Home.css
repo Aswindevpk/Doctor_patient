@@ -1,0 +1,26 @@
+.home{
+    display: flex;
+    flex-direction: row;
+    font-family: var(--font-family);
+}
+.home__main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0px 40px 40px 40px;
+}
+
+.home__main-menu{
+  margin: 1rem 1rem;
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--color-secondary);
+  border-bottom:1px solid rgb(242, 242, 242);
+}
+
+.home__main-menu-item{
+  padding: 0.8rem 0rem;
+  border-bottom:1px solid var(--color-primary);
+}
+

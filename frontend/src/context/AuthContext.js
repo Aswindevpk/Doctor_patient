@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import api from "../services/api";
+import {api} from "../services/api";
 import { checkTokenValidity, isTokenValid } from "./tokenUtils";
 
 const AuthContext = createContext();
@@ -25,11 +25,7 @@ export const AuthProvider = ({ children }) => {
                 setUser(jwtDecode(data.access))
                 setisAuthenticated(true)
                 localStorage.setItem('authTokens', JSON.stringify({ 'access': data.access, 'refresh': data.refresh }));
-                if(user_type=='doctor'){
-                    navigate('/doctor/')
-                }else if (user_type=='patient'){
-                    navigate('/patient/')
-                }
+                navigate('/')
             }
             return data
         }catch (error){

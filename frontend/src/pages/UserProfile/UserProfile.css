@@ -1,14 +1,13 @@
 
 .container {
-  font-family: var(--);
-  max-width: 800px;
+  font-family: var(--font-family);
+  max-width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 40px;
 }
 
 .dashboard-header {
-  text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 20px;
   color: #333;
 }
@@ -16,7 +15,6 @@
 .user-details {
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin-bottom: 20px;
 }

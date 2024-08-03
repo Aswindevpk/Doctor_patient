@@ -1,0 +1,94 @@
+.navbar {
+  background-color: var(--bg-color);
+  border-bottom: 1px solid rgb(242, 242, 242);
+  padding: 0.5rem 2.5rem;
+  position: relative;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.navbar-container-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-bar-container {
+  position: relative;
+  width: 300px;
+  margin: 0 auto; /* Center the search bar */
+}
+
+.navbar-logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  font-family: var(--font-family);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-item {
+  display: flex;
+  cursor: pointer;
+  margin-left: 3rem;
+  font-size: 0.8rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-secondary);
+  text-decoration: none;
+  font-family: var(--font-family);
+}
+
+.navbar-item-name {
+  padding-left: 0.5rem;
+}
+
+.navbar-signup {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 0.1px solid var(--color-primary);
+}
+
+.navbar-signup:hover {
+  color: var(--color-primary);
+  background-color: var(--bg-color);
+  border: 0.1px solid var(--color-primary);
+}
+.navbar-item:hover {
+  color: var(--color-primary);
+}
+
+.navbar-item-write {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media (max-width: 576px) {
+  .navbar-signup {
+    display: none;
+  }
+  .navbar-item {
+    display: none;
+  }
+  .navbar-logo {
+    font-size: 1.8rem;
+  }
+}

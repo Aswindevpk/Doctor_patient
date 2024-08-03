@@ -1,12 +1,11 @@
-import React, { useState, useContext } from "react";
-import AuthContext from "../../context/AuthContext";
-import { json, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FormInput from "../../components/FormInput/FormInput";
 import "./Register.css";
-import axios from "axios";
+import { formApi } from "../../services/api";
+import { Toaster, toast } from "sonner";
 
 const Register = () => {
-  let { registerUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [values, setValues] = useState({
     user_type: "patient", // Default role
@@ -21,16 +20,16 @@ const Register = () => {
     password: "",
     confirmpassword: "",
     error: [],
-    profile_pic:null
+    profile_pic: null,
   });
-
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const [imageurl, setImageurl] = useState(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setImageurl(URL.createObjectURL(event.target.files[0]));
-      setValues({...values,profile_pic:file})
+      setValues({ ...values, profile_pic: file });
     }
   };
 
@@ -148,7 +147,6 @@ const Register = () => {
     e.preventDefault();
     // setting error to null
     setValues({ ...values, error: [] });
-
     // creating formdata for sent images/text
     const data = new FormData();
     data.append("user_type", values.user_type);
@@ -166,29 +164,26 @@ const Register = () => {
 
     //sending the data
     try {
-      const response = await axios.post("http://localhost:8000/accounts/register/", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await formApi.post("/accounts/register/", data);
+      toast.success('User Created')
+      await sleep(3000); 
       navigate("/login");
     } catch (error) {
-      if(error.response){
-          let response = error.response.data;
-          let errorMessages = [];
-          for (let field in response.message) {
-            if (response.message.hasOwnProperty(field)) {
-              response.message[field].forEach((error) => {
-                errorMessages.push(error);
-              });
-            }
+      if (error.response) {
+        let response = error.response.data;
+        let errorMessages = [];
+        for (let field in response.message) {
+          if (response.message.hasOwnProperty(field)) {
+            response.message[field].forEach((error) => {
+              errorMessages.push(error);
+            });
           }
-          console.log(errorMessages)
-          setValues({ ...values, error: errorMessages });
+        }
+        console.log(errorMessages);
+        setValues({ ...values, error: errorMessages });
       }
       console.error("Error during registration", error);
     }
-
   };
 
   const handleLogin = () => {
@@ -205,6 +200,7 @@ const Register = () => {
 
   return (
     <>
+      <Toaster richColors position="top-center" />
       <form onSubmit={handleSubmit}>
         <div className="register-container">
           <div className="register">

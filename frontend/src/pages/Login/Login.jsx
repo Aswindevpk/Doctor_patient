@@ -3,6 +3,7 @@ import AuthContext from '../../context/AuthContext';
 import { useNavigate } from "react-router-dom";
 import  FormInput  from '../../components/FormInput/FormInput';
 import "./Login.css";
+import { Toaster, toast } from "sonner";
 
 const Login = () => {
   let { loginUser } = useContext(AuthContext);
@@ -70,7 +71,8 @@ const Login = () => {
 
   return (
     <div className='login'>
-      <h2 className='login__header'>Login to Med</h2>
+      <Toaster richColors position="top-center" />
+      <h2 className='login__header'>Login to Your Account</h2>
       <div className="role-selection-container">
             <label>
               <input

@@ -14,7 +14,6 @@ class RegisterUser(APIView):
 
     def post(self,request):
         try:
-            print(request.data)
             data = request.data
             serializer = self.serializer_class(data=data)
             if not serializer.is_valid():
@@ -94,7 +93,6 @@ class UserDetails(APIView):
         try:
             user = CustomUser.objects.get(id=request.user.id)
             serializer = UserDetailSerializer(instance=user)
-            print(serializer.data)
             return Response({
                     "status":True,
                     "data":serializer.data},status.HTTP_200_OK)
