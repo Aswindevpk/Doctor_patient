@@ -13,7 +13,7 @@ const FeaturedArticle = ({ blog }) => {
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   
 
-  let blog_img = blog ? `http://localhost:8000${blog.image}` : "";
+  let blog_img = blog ? `https://aswin.pythonanywhere.com/${blog.image}` : "";
 
   const handleBlogClick = (id) => {
     navigate(`/blog/${id}/`);
@@ -27,7 +27,7 @@ const FeaturedArticle = ({ blog }) => {
     try {
       const response = await api.delete(`/blog/article/${id}`);
       if(response.status === 200){
-        toast.danger('Blog Deleted Successfully.')
+        toast.error('Blog Deleted Successfully.')
         await sleep(2000);
         navigate("/");
       }
@@ -46,6 +46,7 @@ const FeaturedArticle = ({ blog }) => {
 
   return (
     <div className="FeaturedArticle">
+      <Toaster richColors position="top-center" />
       <div className="FeaturedArticle__content">
         <div className="FeaturedArticle__content-author">
           <span className="FeaturedArticle__content-author__name">

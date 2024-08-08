@@ -5,3 +5,5 @@ export {default as Home} from './Home/Home';
 export {default as BlogView} from './BlogView/BlogView';
 export {default as WriteBlog} from './WriteBlog/WriteBlog';
 export {default as Homedoctor} from './Homedoctor/Homedoctor';
+export {default as AppointmentForm} from './AppointmentForm/AppointmentForm';
+export {default as AppointmentDetails} from './AppointmentDetails/AppointmentDetails';

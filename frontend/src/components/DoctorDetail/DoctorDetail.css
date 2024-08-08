@@ -1,0 +1,49 @@
+.DoctorDetail {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  .DoctorDetail__img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .DoctorDetail__main {
+    flex-grow: 1;
+  }
+  
+  .DoctorDetail__main-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  
+  .DoctorDetail__main-about {
+    font-size: 0.75rem;
+    color:var(--color-secondary);
+    padding-right: 5px;
+    word-break: break-word;
+  }
+  
+  .DoctorDetail__btn {
+    color: var(--color-primary);
+    background-color: white;
+    border: 1px solid var(--color-primary);
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 4px 8px ;
+    font-size: 0.875rem;
+    font-family: var(--font-family);
+    cursor: pointer;
+  }
+
+  .DoctorDetail_btn:hover{
+    background-color: black;
+    border: 1px solid var(--color-primary);
+    color: white;
+  }
+  
+
+  

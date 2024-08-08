@@ -25,7 +25,7 @@ const DoctorDashboard = () => {
     logoutUser();
   };
 
-  let profilePicUrl = user ? `http://localhost:8000${user.profile_pic}` : '';
+  let profilePicUrl = user ? `https://aswin.pythonanywhere.com/${user.profile_pic}` : '';
   if (!user) return <div>Loading...</div>;
 
   return (

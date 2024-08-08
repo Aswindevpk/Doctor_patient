@@ -9,15 +9,12 @@ const BlogForm = () => {
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const [formData, setFormData] = useState({
     title: '',
-    category: '',
+    category: '1',
     content: '',
     summary:'',
     image:null,
   });
   const [imageurl, setImageurl] = useState(null);
-
-
-
   const [categories,setCategories] = useState([]);
 
   const handleFileChange = (event) => {
@@ -53,7 +50,7 @@ const BlogForm = () => {
             content:fetchedBlog.content,
             summary:fetchedBlog.summary,
           })
-          let image_url = fetchedBlog ? `http://localhost:8000${fetchedBlog.image}` : '';
+          let image_url = fetchedBlog ? `https://aswin.pythonanywhere.com/${fetchedBlog.image}` : '';
           setImageurl(image_url)
         } catch (error) {
           console.error('Error fetching blog:', error);

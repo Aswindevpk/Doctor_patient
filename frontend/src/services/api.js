@@ -1,7 +1,11 @@
 // api.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/'; // Replace with your Django API base URL
+// for deployment
+// const API_URL = 'https://aswin.pythonanywhere.com/'; 
+
+//for development
+const API_URL = 'http://localhost:8000/';
 
 const api = axios.create({
   baseURL: API_URL,

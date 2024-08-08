@@ -85,6 +85,7 @@ class LogoutUser(APIView):
                 'message':e
             },status=status.HTTP_400_BAD_REQUEST)
         
+
 class UserDetails(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
@@ -101,3 +102,22 @@ class UserDetails(APIView):
             return Response({'error': 'No article found !'}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class DoctorList(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self,request):
+        try:
+            users = CustomUser.objects.filter(user_type='doctor')
+            serializer = UserDetailSerializer(users ,many=True)
+            return Response({
+                    "status":True,
+                    "data":serializer.data},status.HTTP_200_OK)
+                
+        except CustomUser.DoesNotExist:
+            return Response({'error': 'No doctors found !'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+

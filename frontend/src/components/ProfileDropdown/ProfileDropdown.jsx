@@ -23,7 +23,7 @@ const ProfileDropdown = () => {
     fetchDetails();
   }, []);
 
-  let profilePicUrl = Loggeduser ? `http://localhost:8000${Loggeduser.profile_pic}` : '';
+  let profilePicUrl = Loggeduser ? `https://aswin.pythonanywhere.com/${Loggeduser.profile_pic}` : '';
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);

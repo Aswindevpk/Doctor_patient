@@ -36,7 +36,7 @@ const BlogView = () => {
     getBlog();
   }, [id]);
 
-  let image_url = blog ? `http://localhost:8000${blog.image}` : "";
+  let image_url = blog ? `https://aswin.pythonanywhere.com/${blog.image}` : "";
 
   if (!blog) {
     return <div>No blog found</div>;
@@ -50,8 +50,6 @@ const BlogView = () => {
         <span>By {blog.author.username}</span>
         <span> | </span>
         <span>{new Date(blog.created_at).toLocaleDateString()}</span>
-        <span> | </span>
-        <span>{topics.find((topics) => topics.id == blog.category).name}</span>
         <p className="blog-summary">{blog.summary}</p>
       </div>
       <div className="image-container">

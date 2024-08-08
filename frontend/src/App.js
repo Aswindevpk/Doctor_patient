@@ -1,6 +1,6 @@
 import './App.css';
 import { PrivateRoute, PublicRoute, DoctorRoute, PatientRoute } from './utils/Routes';
-import { Login, Register, UserProfile, Home, WriteBlog, BlogView, Homedoctor } from './pages';
+import { Login, Register, UserProfile, Home, WriteBlog, BlogView, Homedoctor,AppointmentDetails,AppointmentForm } from './pages';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
@@ -25,6 +25,8 @@ function App() {
               <Route path='/blog/:id' element={<BlogView />} />
               <Route element={<PatientRoute />}>
                 <Route path='/' element={<Home />} />
+                <Route path='/appointment-form/:id/:doctor' element={<AppointmentForm/>} />
+                <Route path='/appointments/:id' element={<AppointmentDetails/>} />
               </Route>
               <Route element={<DoctorRoute />}>
                 <Route path='/doctor-home' element={<Homedoctor />} />
